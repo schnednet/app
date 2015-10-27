@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated orgc -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="orgchart.presentation.OrgchartModelWizardID"
+            name="%_UI_OrgchartModelWizard_label"
+            class="orgchart.presentation.OrgchartModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/OrgchartModelFile.gif">
+         <description>%_UI_OrgchartModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated orgc -->
+      <editor
+            id="orgchart.presentation.OrgchartEditorID"
+            name="%_UI_OrgchartEditor_label"
+            icon="icons/full/obj16/OrgchartModelFile.gif"
+            extensions="orgchart"
+            class="orgchart.presentation.OrgchartEditor"
+            contributorClass="orgchart.presentation.OrgchartActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
