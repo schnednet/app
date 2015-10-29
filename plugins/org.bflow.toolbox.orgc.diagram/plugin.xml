@@ -669,6 +669,23 @@
    <extension point="org.eclipse.ui.handlers" id="menu-handlers">
       <?gmfgen generated="true"?>
    </extension>
+   <extension point="org.eclipse.ui.actionSets">
+      <?gmfgen generated="false"?>
+      <actionSet
+            label="%applicationActionSetLabel"
+            visible="true"
+            id="org.bflow.toolbox.orgc.diagram.ActionSet">
+         <action
+               class="orgchart.diagram.extensions.actions.NewOrgcDiagramWizardAction"
+               icon="icons/obj16/OrgchartDiagramFile.gif"
+               id="org.bflow.toolbox.orgc.diagram.createNewOrgcWizardAction"
+               label="%OrgcCreationWizardTitle"
+               style="push"
+               toolbarPath="Normal"
+               tooltip="%OrgcCreationWizardTitle">
+         </action>
+      </actionSet>
+   </extension>
 
    <!-- optionally, specify keybindings -->
 </plugin>
