@@ -2,14 +2,17 @@ package orgchart.diagram.extensions.actions;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
+import orgchart.diagram.part.OrgcCreationWizard;
 
 /**
  * Implements the IWorkbenchWindowActionDelegate to call the new orgc diagram
  * wizard
  * 
- * @author MArkus Schnädelbach
+ * @author Markus Schnädelbach
  * 
  */
 public class NewOrgcDiagramWizardAction implements
@@ -28,7 +31,22 @@ public class NewOrgcDiagramWizardAction implements
 
 	@Override
 	public void run(IAction action) {
-		System.out.println("TEWST");
+		try {
+			OrgcCreationWizard wizard = new OrgcCreationWizard();
+				
+			ISelection iSel = workbenchWindow.getActivePage().getSelection();	
+			
+			StructuredSelection sSel = new StructuredSelection(iSel);
+			
+			wizard.init(workbenchWindow.getWorkbench(), sSel);
+
+			WizardDialog wd = new WizardDialog(workbenchWindow.getShell(),
+					wizard);
+
+			wd.open();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 
 	}
 
