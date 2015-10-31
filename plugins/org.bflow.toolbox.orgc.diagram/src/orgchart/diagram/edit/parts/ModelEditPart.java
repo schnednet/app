@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.bflow.toolbox.extensions.edit.parts.BflowDiagramEditPart;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DiagramDragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
@@ -19,15 +19,16 @@ import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.gmf.tooling.runtime.edit.policies.reparent.CreationEditPolicyWithCustomReparent;
+
 import orgchart.diagram.edit.commands.OrgcCreateShortcutDecorationsCommand;
 import orgchart.diagram.edit.policies.ModelCanonicalEditPolicy;
 import orgchart.diagram.edit.policies.ModelItemSemanticEditPolicy;
 import orgchart.diagram.part.OrgcVisualIDRegistry;
 
 /**
- * @generated
+ * @generated Not
  */
-public class ModelEditPart extends DiagramEditPart {
+public class ModelEditPart extends BflowDiagramEditPart {
 
 	/**
 	 * @generated

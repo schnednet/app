@@ -40,6 +40,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.bflow.toolbox.orgc.edit;visibility:=reexport,
  org.eclipse.ocl.ecore;visibility:=reexport,
  org.eclipse.emf.validation;visibility:=reexport,
- org.eclipse.gef;visibility:=reexport
+ org.eclipse.gef;visibility:=reexport,
+ org.bflow.toolbox.diagram.extensions,
+ org.bflow.toolbox.epc.diagram
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
