@@ -3,10 +3,13 @@
  */
 package orgchart.diagram.edit.parts;
 
+import org.bflow.toolbox.extensions.edit.parts.BflowDiagramEditPart;
+import org.bflow.toolbox.extensions.edit.parts.BflowNodeEditPart;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
-import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.common.notify.Notification;
@@ -19,22 +22,21 @@ import org.eclipse.gef.editpolicies.LayoutEditPolicy;
 import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.gmf.tooling.runtime.draw2d.CenterLayout;
 import org.eclipse.swt.graphics.Color;
+
 import orgchart.diagram.edit.policies.InternalPersonItemSemanticEditPolicy;
 import orgchart.diagram.part.OrgcVisualIDRegistry;
 
 /**
  * @generated
  */
-public class InternalPersonEditPart extends ShapeNodeEditPart {
+public class InternalPersonEditPart extends  BflowNodeEditPart {
 
 	/**
 	 * @generated
@@ -213,42 +215,6 @@ public class InternalPersonEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	protected void setForegroundColor(Color color) {
-		if (primaryShape != null) {
-			primaryShape.setForegroundColor(color);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setBackgroundColor(Color color) {
-		if (primaryShape != null) {
-			primaryShape.setBackgroundColor(color);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setLineWidth(int width) {
-		if (primaryShape instanceof Shape) {
-			((Shape) primaryShape).setLineWidth(width);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setLineType(int style) {
-		if (primaryShape instanceof Shape) {
-			((Shape) primaryShape).setLineStyle(style);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(OrgcVisualIDRegistry
 				.getType(InternalPersonNameEditPart.VISUAL_ID));
@@ -268,7 +234,7 @@ public class InternalPersonEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public class InternalPersonFigure extends RectangleFigure {
 
@@ -276,32 +242,38 @@ public class InternalPersonEditPart extends ShapeNodeEditPart {
 		 * @generated
 		 */
 		private WrappingLabel fFigureInternalPersonLabelFigure;
-
+		
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		public InternalPersonFigure() {
-			this.setForegroundColor(THIS_FORE);
-			this.setBackgroundColor(THIS_BACK);
-			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100),
-					getMapMode().DPtoLP(50)));
-			this.setBorder(new MarginBorder(getMapMode().DPtoLP(5),
-					getMapMode().DPtoLP(5), getMapMode().DPtoLP(5),
-					getMapMode().DPtoLP(5)));
+			this.setLayoutManager(new StackLayout());
+
+			BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
+			if (diagramEditPart != null) {
+				this.setBackgroundColor(diagramEditPart.getColorSchema().getBackground(InternalPersonEditPart.class));
+				this.setForegroundColor(diagramEditPart.getColorSchema().getForeground(InternalPersonEditPart.class));
+			} else {
+				this.setBackgroundColor(new Color(null, 255, 255, 0));
+				this.setForegroundColor(ColorConstants.black);
+			}
+			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100), getMapMode().DPtoLP(50)));
 			createContents();
 		}
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		private void createContents() {
-
 			fFigureInternalPersonLabelFigure = new WrappingLabel();
-
-			fFigureInternalPersonLabelFigure.setText("InternalPerson");
+			fFigureInternalPersonLabelFigure.setAlignment(PositionConstants.CENTER);
+			fFigureInternalPersonLabelFigure.setTextJustification(PositionConstants.CENTER);
+			fFigureInternalPersonLabelFigure.setTextWrap(true);
+			fFigureInternalPersonLabelFigure.setText("");
+			fFigureInternalPersonLabelFigure.setBorder(new MarginBorder(getMapMode().DPtoLP(4), getMapMode().DPtoLP(4), getMapMode().DPtoLP(4), getMapMode()
+					.DPtoLP(4)));
 
 			this.add(fFigureInternalPersonLabelFigure);
-
 		}
 
 		/**
@@ -313,14 +285,12 @@ public class InternalPersonEditPart extends ShapeNodeEditPart {
 
 	}
 
-	/**
-	 * @generated
-	 */
-	static final Color THIS_FORE = new Color(null, 0, 0, 0);
+	public IFigure getPrimaryFigure() {
+		return getPrimaryShape();
+	}
 
-	/**
-	 * @generated
-	 */
-	static final Color THIS_BACK = new Color(null, 255, 255, 0);
+	public WrappingLabel[] getLabels() {
+		return new WrappingLabel[] { ((InternalPersonFigure) primaryShape).getFigureInternalPersonLabelFigure() };
+	}
 
 }

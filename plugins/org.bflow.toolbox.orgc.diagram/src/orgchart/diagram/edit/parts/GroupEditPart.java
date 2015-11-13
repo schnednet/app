@@ -3,12 +3,19 @@
  */
 package orgchart.diagram.edit.parts;
 
+import java.util.List;
+
+import org.bflow.toolbox.extensions.edit.parts.BflowDiagramEditPart;
+import org.bflow.toolbox.extensions.edit.parts.BflowNodeEditPart;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Ellipse;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.gef.EditPart;
@@ -19,22 +26,21 @@ import org.eclipse.gef.editpolicies.LayoutEditPolicy;
 import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.gmf.tooling.runtime.draw2d.CenterLayout;
 import org.eclipse.swt.graphics.Color;
+
 import orgchart.diagram.edit.policies.GroupItemSemanticEditPolicy;
 import orgchart.diagram.part.OrgcVisualIDRegistry;
 
 /**
  * @generated
  */
-public class GroupEditPart extends ShapeNodeEditPart {
+public class GroupEditPart extends BflowNodeEditPart {
 
 	/**
 	 * @generated
@@ -212,42 +218,6 @@ public class GroupEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	protected void setForegroundColor(Color color) {
-		if (primaryShape != null) {
-			primaryShape.setForegroundColor(color);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setBackgroundColor(Color color) {
-		if (primaryShape != null) {
-			primaryShape.setBackgroundColor(color);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setLineWidth(int width) {
-		if (primaryShape instanceof Shape) {
-			((Shape) primaryShape).setLineWidth(width);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setLineType(int style) {
-		if (primaryShape instanceof Shape) {
-			((Shape) primaryShape).setLineStyle(style);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(OrgcVisualIDRegistry
 				.getType(GroupNameEditPart.VISUAL_ID));
@@ -267,7 +237,7 @@ public class GroupEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public class GroupFigure extends Ellipse {
 
@@ -275,32 +245,135 @@ public class GroupEditPart extends ShapeNodeEditPart {
 		 * @generated
 		 */
 		private WrappingLabel fFigureGroupLabelFigure;
+		
+		/**
+		 * @generated NOT
+		 */
+		Shape nameContainer = null;
+		private int tWidth = 1;
+		private int tHeight = 1;
+		private final int xInsets = 15;
+		private final int yInsets = 10;
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		public GroupFigure() {
-			this.setForegroundColor(THIS_FORE);
-			this.setBackgroundColor(THIS_BACK);
+			StackLayout layoutGroup = new StackLayout() {
+
+				public void layout(IFigure figure) {
+					// TODO Auto-generated method stub
+					Rectangle r = new Rectangle(figure.getBounds().x + 20,
+							figure.getBounds().y + 10,
+							figure.getBounds().width - 40,
+							figure.getBounds().height - 20);
+					List children = figure.getChildren();
+					IFigure child;
+					for (int i = 0; i < children.size(); i++) {
+						child = (IFigure) children.get(i);
+						if (!(child instanceof WrappingLabel)) {
+							child.setBounds(new Rectangle(
+									figure.getBounds().x + 5, figure
+											.getBounds().y + 5, figure
+											.getBounds().width - 10, figure
+											.getBounds().height - 10));
+						}
+
+					}
+				}
+			};
+
+			this.setLayoutManager(layoutGroup);
+
+			BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart
+					.getCurrentViewer();
+			if (diagramEditPart != null) {
+				this.setBackgroundColor(diagramEditPart.getColorSchema().getBackground(GroupEditPart.class));
+				this.setForegroundColor(diagramEditPart.getColorSchema().getForeground(GroupEditPart.class));
+			} else {
+				this.setBackgroundColor(new Color(null, 255, 255, 0));
+				this.setForegroundColor(ColorConstants.black);
+			}
+
 			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100),
 					getMapMode().DPtoLP(50)));
-			this.setBorder(new MarginBorder(getMapMode().DPtoLP(5),
-					getMapMode().DPtoLP(5), getMapMode().DPtoLP(5),
-					getMapMode().DPtoLP(5)));
+			this.setSize(getMapMode().DPtoLP(100), getMapMode().DPtoLP(50));
+			this.tWidth = this.getPreferredSize().width;
+			this.tHeight = this.getPreferredSize().height;
 			createContents();
 		}
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		private void createContents() {
 
+			Ellipse groupInnerFigure0 = new Ellipse();
+			
+			BflowDiagramEditPart diagramEditPart = 
+				BflowDiagramEditPart.getCurrentViewer();
+			if(diagramEditPart != null){
+				groupInnerFigure0.setBackgroundColor(
+						diagramEditPart.getColorSchema().getBackground(
+								GroupEditPart.class));
+				groupInnerFigure0.setForegroundColor(
+						diagramEditPart.getColorSchema().getForeground(
+								GroupEditPart.class));
+			}
+			else{
+				groupInnerFigure0.setBackgroundColor(new Color(null, 255, 255, 0));
+				groupInnerFigure0.setForegroundColor(ColorConstants.black);
+			}
+			
+			groupInnerFigure0.setLayoutManager(new StackLayout());
+
+			this.add(groupInnerFigure0, new Rectangle(getMapMode().DPtoLP(5),
+					getMapMode().DPtoLP(5), getMapMode().DPtoLP(90),
+					getMapMode().DPtoLP(40)));
+
 			fFigureGroupLabelFigure = new WrappingLabel();
+			fFigureGroupLabelFigure.setAlignment(PositionConstants.CENTER);
+			fFigureGroupLabelFigure.setTextWrap(true);
 
-			fFigureGroupLabelFigure.setText("Group");
+			groupInnerFigure0.add(fFigureGroupLabelFigure);
+			layoutLabelContainer(groupInnerFigure0, xInsets, yInsets);
+			nameContainer = groupInnerFigure0;
+		}
+		
+		private void layoutLabelContainer(Shape figure, final int xOffset, final int yOffset) {
+			StackLayout layoutEventPolygonFigure0 = new StackLayout() {
+				
+				@SuppressWarnings("unchecked")
+				public void layout(IFigure figure) {
+					Rectangle r = new Rectangle(figure.getBounds().x + xOffset,
+							figure.getBounds().y + yOffset,
+							figure.getBounds().width - 2 * xOffset, figure.getBounds().height	- 2 * yOffset);
+					List children = figure.getChildren();
+					IFigure child;
+					for (int i = 0; i < children.size(); i++) {
+						child = (IFigure) children.get(i);
+						child.setBounds(r);
+					}
+				}
+			};
+			figure.setLayoutManager(layoutEventPolygonFigure0);
+		}
+		
+		/**
+		 * @generated NOT
+		 */
+		protected void fillShape(Graphics graphics) {
+			super.fillShape(graphics);
 
-			this.add(fFigureGroupLabelFigure);
+			Rectangle actualBounds = getBounds();
 
+			float xScale = (float) actualBounds.width / tWidth;
+			float yScale = (float) actualBounds.height / tHeight;
+
+			if (nameContainer != null) {
+				layoutLabelContainer(nameContainer, (int) (xScale * xInsets),
+						(int) (yScale * yInsets));
+			}
 		}
 
 		/**
@@ -312,14 +385,12 @@ public class GroupEditPart extends ShapeNodeEditPart {
 
 	}
 
-	/**
-	 * @generated
-	 */
-	static final Color THIS_FORE = new Color(null, 0, 0, 0);
+	public IFigure getPrimaryFigure() {
+		return getPrimaryShape();
+	}
 
-	/**
-	 * @generated
-	 */
-	static final Color THIS_BACK = new Color(null, 255, 255, 0);
+	public WrappingLabel[] getLabels() {
+		return new WrappingLabel[] { ((GroupFigure) primaryShape).getFigureGroupLabelFigure() };
+	}
 
 }

@@ -5,7 +5,6 @@ package orgchart.diagram.edit.parts;
 
 import java.util.List;
 
-import org.bflow.toolbox.epc.diagram.edit.parts.ParticipantEditPart.ParticipantFigure;
 import org.bflow.toolbox.epc.extensions.edit.parts.OrganisationUnitBorder;
 import org.bflow.toolbox.extensions.edit.parts.BflowDiagramEditPart;
 import org.bflow.toolbox.extensions.edit.parts.BflowNodeEditPart;
@@ -29,7 +28,6 @@ import org.eclipse.gef.editpolicies.LayoutEditPolicy;
 import org.eclipse.gef.editpolicies.NonResizableEditPolicy;
 import org.eclipse.gef.requests.CreateRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
