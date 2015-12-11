@@ -5,6 +5,7 @@ package orgchart.diagram.part;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.bflow.toolbox.extensions.wizards.DiagramPageSetupWizardPage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -46,6 +47,12 @@ public class OrgcCreationWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	private boolean openNewlyCreatedDiagramEditor = true;
+	
+	/**
+	 * The <code>DiagramPageSetupWizardPage</code> to set the diagram size.
+	 * @generated NOT
+	 */
+	private DiagramPageSetupWizardPage pageSetupWizardPage;
 
 	/**
 	 * @generated
@@ -96,16 +103,17 @@ public class OrgcCreationWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public void addPages() {
 		diagramModelFilePage = new OrgcCreationWizardPage(
-				"DiagramModelFile", getSelection(), "orgc"); //$NON-NLS-1$ //$NON-NLS-2$
-		diagramModelFilePage
-				.setTitle(Messages.OrgcCreationWizard_DiagramModelFilePageTitle);
-		diagramModelFilePage
-				.setDescription(Messages.OrgcCreationWizard_DiagramModelFilePageDescription);
+				"DiagramModelFile", getWorkbench() , getSelection(), "orgc"); //$NON-NLS-1$ //$NON-NLS-2$
+		diagramModelFilePage.setTitle(Messages.OrgcCreationWizard_DiagramModelFilePageTitle);
+		diagramModelFilePage.setDescription(Messages.OrgcCreationWizard_DiagramModelFilePageDescription);
 		addPage(diagramModelFilePage);
+		
+		pageSetupWizardPage = new DiagramPageSetupWizardPage();
+		addPage(pageSetupWizardPage);
 	}
 
 	/**
