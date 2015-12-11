@@ -158,9 +158,10 @@
    <extension point="org.eclipse.ui.preferencePages" id="prefpages">
       <?gmfgen generated="true"?>
       <page
+            category="org.bflow.toolbox.epc.diagram.bflowMainPage"
+            class="orgchart.diagram.preferences.DiagramGeneralPreferencePage"
             id="org.bflow.toolbox.orgc.diagram.general"
-            name="%prefpage.org.bflow.toolbox.orgc.diagram.general"
-            class="orgchart.diagram.preferences.DiagramGeneralPreferencePage">
+            name="%prefpage.org.bflow.toolbox.orgc.diagram.general">
       </page>
       <page
             id="org.bflow.toolbox.orgc.diagram.appearance"
@@ -509,117 +510,8 @@
        </propertyTester>
    </extension>
 
-	   <extension point="org.eclipse.ui.navigator.viewer" id="navigator-viewbinding">
-      <?gmfgen generated="true"?>
-      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
-         <includes>
-            <contentExtension pattern="org.bflow.toolbox.orgc.diagram.resourceContent"/>
-			<contentExtension pattern="org.bflow.toolbox.orgc.diagram.domainResourceContent"/>
-            <contentExtension pattern="org.bflow.toolbox.orgc.diagram.navigatorLinkHelper"/>
-         </includes>
-      </viewerContentBinding>
-      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
-         <includes>
-            <actionExtension pattern="org.bflow.toolbox.orgc.diagram.navigatorActionProvider"/>
-         </includes>
-      </viewerActionBinding>
-   </extension>
 
-   <extension point="org.eclipse.ui.navigator.navigatorContent" id="navigator-content">
-      <?gmfgen generated="true"?>
-      <navigatorContent
-            id="org.bflow.toolbox.orgc.diagram.resourceContent" 
-            name="%navigatorContentName" 
-            priority="normal" 
-            contentProvider="orgchart.diagram.navigator.OrgcNavigatorContentProvider" 
-            labelProvider="orgchart.diagram.navigator.OrgcNavigatorLabelProvider"
-            icon="icons/obj16/OrgchartDiagramFile.gif"
-            activeByDefault="true">
-         <triggerPoints>
-            <or>
-	           <and>
-    	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="orgc"/>
-               </and>
-               <instanceof value="orgchart.diagram.navigator.OrgcAbstractNavigatorItem"/>
-           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
-           	      <test property="org.bflow.toolbox.orgc.diagram.isShortcut"/>
-           	   </adapt>
-            </or>
-         </triggerPoints>
-         <possibleChildren>
-            <or>
-         	   <instanceof value="orgchart.diagram.navigator.OrgcAbstractNavigatorItem"/>
-           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
-           	      <test property="org.bflow.toolbox.orgc.diagram.isShortcut"/>
-           	   </adapt>
-            </or>
-         </possibleChildren>
-         <commonSorter 
-               id="org.bflow.toolbox.orgc.diagram.navigatorSorter" 
-               class="orgchart.diagram.navigator.OrgcNavigatorSorter">
-            <parentExpression>
-               <or>
-	              <and>
-    	             <instanceof value="org.eclipse.core.resources.IFile"/>
-        	         <test property="org.eclipse.core.resources.extension" value="orgc"/>
-                  </and>
-                  <instanceof value="orgchart.diagram.navigator.OrgcAbstractNavigatorItem"/>
-               </or>
-            </parentExpression>
-         </commonSorter>
-      </navigatorContent>
-      <navigatorContent
-            id="org.bflow.toolbox.orgc.diagram.domainResourceContent" 
-            name="%domainNavigatorContentName" 
-            priority="normal" 
-            contentProvider="orgchart.diagram.navigator.OrgcDomainNavigatorContentProvider" 
-            labelProvider="orgchart.diagram.navigator.OrgcDomainNavigatorLabelProvider"
-            icon="icons/obj16/OrgchartDiagramFile.gif"
-            activeByDefault="true">
-         <triggerPoints>
-            <or>
-	           <and>
-    	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="orgchart"/>
-               </and>
-               <instanceof value="orgchart.diagram.navigator.OrgcDomainNavigatorItem"/>
-            </or>
-         </triggerPoints>
-         <possibleChildren>
-            <instanceof value="orgchart.diagram.navigator.OrgcDomainNavigatorItem"/>
-         </possibleChildren>
-      </navigatorContent>
-      <actionProvider
-            id="org.bflow.toolbox.orgc.diagram.navigatorActionProvider"
-            class="orgchart.diagram.navigator.OrgcNavigatorActionProvider">
-         <enablement>
-            <or>
-               <instanceof value="orgchart.diagram.navigator.OrgcAbstractNavigatorItem"/>
-           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
-           	      <test property="org.bflow.toolbox.orgc.diagram.isShortcut"/>
-           	   </adapt>
-            </or>
-         </enablement>
-      </actionProvider>
-   </extension>
    
-	   <extension point="org.eclipse.ui.navigator.linkHelper" id="navigator-linkhelper">
-      <?gmfgen generated="true"?>
-      <linkHelper
-            id="org.bflow.toolbox.orgc.diagram.navigatorLinkHelper"
-            class="orgchart.diagram.navigator.OrgcNavigatorLinkHelper">
-         <editorInputEnablement>
-            <and>
-               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
-               <test property="org.bflow.toolbox.orgc.diagram.isURIEditorInput"/>
-            </and>
-         </editorInputEnablement>
-         <selectionEnablement>
-            <instanceof value="orgchart.diagram.navigator.OrgcAbstractNavigatorItem"/>
-         </selectionEnablement>
-      </linkHelper>
-   </extension>
    <extension point="org.eclipse.ui.commands" id="update-cmd">
       <?gmfgen generated="true"?>
       <command
