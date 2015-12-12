@@ -284,17 +284,6 @@ public class GroupEditPart extends BflowNodeEditPart {
 			};
 
 			this.setLayoutManager(layoutGroup);
-
-			BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart
-					.getCurrentViewer();
-			if (diagramEditPart != null) {
-				this.setBackgroundColor(diagramEditPart.getColorSchema().getBackground(GroupEditPart.class));
-				this.setForegroundColor(diagramEditPart.getColorSchema().getForeground(GroupEditPart.class));
-			} else {
-				this.setBackgroundColor(new Color(null, 255, 255, 0));
-				this.setForegroundColor(ColorConstants.black);
-			}
-
 			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100),
 					getMapMode().DPtoLP(50)));
 			this.setSize(getMapMode().DPtoLP(100), getMapMode().DPtoLP(50));

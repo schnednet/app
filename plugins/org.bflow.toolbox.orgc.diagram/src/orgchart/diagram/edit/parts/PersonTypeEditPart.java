@@ -250,15 +250,6 @@ public class PersonTypeEditPart extends BflowNodeEditPart {
 		public PersonTypeFigure() {
 			this.setLayoutManager(new StackLayout());
 
-			BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
-			if (diagramEditPart != null) {
-				this.setBackgroundColor(diagramEditPart.getColorSchema().getBackground(PersonTypeEditPart.class));
-				this.setForegroundColor(diagramEditPart.getColorSchema().getForeground(PersonTypeEditPart.class));
-			} else {
-				this.setBackgroundColor(new Color(null, 255, 255, 0));
-				this.setForegroundColor(ColorConstants.black);
-			}
-
 			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100), getMapMode().DPtoLP(50)));
 			this.setBorder(new CompoundBorder(
 					new MarginBorder(getMapMode().DPtoLP(0), getMapMode().DPtoLP(10), getMapMode().DPtoLP(0), getMapMode().DPtoLP(0)), new PersonTypeBorder()));

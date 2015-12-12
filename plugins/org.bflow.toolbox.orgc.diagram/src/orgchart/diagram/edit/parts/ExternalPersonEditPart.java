@@ -246,14 +246,6 @@ public class ExternalPersonEditPart extends BflowNodeEditPart {
 		 */
 		public ExternalPersonFigure() {
 			this.setLayoutManager(new StackLayout());
-			BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
-			if (diagramEditPart != null) {
-				this.setBackgroundColor(diagramEditPart.getColorSchema().getBackground(ExternalPersonEditPart.class));
-				this.setForegroundColor(diagramEditPart.getColorSchema().getForeground(ExternalPersonEditPart.class));
-			} else {
-				this.setBackgroundColor(ColorConstants.white);
-				this.setForegroundColor(ColorConstants.black);
-			}
 			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100), getMapMode().DPtoLP(50)));
 			createContents();
 		}

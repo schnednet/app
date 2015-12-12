@@ -248,15 +248,6 @@ public class InternalPersonEditPart extends  BflowNodeEditPart {
 		 */
 		public InternalPersonFigure() {
 			this.setLayoutManager(new StackLayout());
-
-			BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
-			if (diagramEditPart != null) {
-				this.setBackgroundColor(diagramEditPart.getColorSchema().getBackground(InternalPersonEditPart.class));
-				this.setForegroundColor(diagramEditPart.getColorSchema().getForeground(InternalPersonEditPart.class));
-			} else {
-				this.setBackgroundColor(new Color(null, 255, 255, 0));
-				this.setForegroundColor(ColorConstants.black);
-			}
 			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100), getMapMode().DPtoLP(50)));
 			createContents();
 		}

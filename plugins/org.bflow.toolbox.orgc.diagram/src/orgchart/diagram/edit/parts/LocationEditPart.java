@@ -263,15 +263,6 @@ public class LocationEditPart extends BflowNodeEditPart {
 		public LocationFigure() {
 			this.setLayoutManager(new StackLayout());
 
-			BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
-			if (diagramEditPart != null) {
-				this.setBackgroundColor(diagramEditPart.getColorSchema().getBackground(LocationEditPart.class));
-				this.setForegroundColor(diagramEditPart.getColorSchema().getForeground(LocationEditPart.class));
-			} else {
-				this.setBackgroundColor(new Color(null, 255, 255, 0));
-				this.setForegroundColor(ColorConstants.black);
-			}
-
 			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100),getMapMode().DPtoLP(50)));
 			this.setBorder(new LocationBorder());
 			this.tWidth = this.getPreferredSize().width;

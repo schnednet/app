@@ -265,15 +265,6 @@ public class ParticipantEditPart extends BflowNodeEditPart {
 		public ParticipantFigure() {
 			this.setLayoutManager(new StackLayout());
 
-			BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
-			if (diagramEditPart != null) {
-				this.setBackgroundColor(diagramEditPart.getColorSchema().getBackground(ParticipantEditPart.class));
-				this.setForegroundColor(diagramEditPart.getColorSchema().getForeground(ParticipantEditPart.class));
-			} else {
-				this.setBackgroundColor(new Color(null, 255, 255, 0));
-				this.setForegroundColor(ColorConstants.black);
-			}
-
 			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100),getMapMode().DPtoLP(50)));
 			this.setBorder(new OrganisationUnitBorder());
 			this.tWidth = this.getPreferredSize().width;
