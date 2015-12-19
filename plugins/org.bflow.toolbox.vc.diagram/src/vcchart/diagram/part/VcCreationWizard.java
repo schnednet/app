@@ -5,6 +5,7 @@ package vcchart.diagram.part;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.bflow.toolbox.extensions.wizards.DiagramPageSetupWizardPage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -74,6 +75,12 @@ public class VcCreationWizard extends Wizard implements INewWizard {
 	public final boolean isOpenNewlyCreatedDiagramEditor() {
 		return openNewlyCreatedDiagramEditor;
 	}
+	
+	/**
+	 * The <code>DiagramPageSetupWizardPage</code> to set the diagram size.
+	 * @generated NOT
+	 */
+	private DiagramPageSetupWizardPage pageSetupWizardPage;
 
 	/**
 	 * @generated
@@ -96,16 +103,19 @@ public class VcCreationWizard extends Wizard implements INewWizard {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public void addPages() {
 		diagramModelFilePage = new VcCreationWizardPage(
-				"DiagramModelFile", getSelection(), "vc"); //$NON-NLS-1$ //$NON-NLS-2$
+				"DiagramModelFile", getWorkbench(), getSelection(), "vc"); //$NON-NLS-1$ //$NON-NLS-2$
 		diagramModelFilePage
 				.setTitle(Messages.VcCreationWizard_DiagramModelFilePageTitle);
 		diagramModelFilePage
 				.setDescription(Messages.VcCreationWizard_DiagramModelFilePageDescription);
 		addPage(diagramModelFilePage);
+		
+		pageSetupWizardPage = new DiagramPageSetupWizardPage();
+		addPage(pageSetupWizardPage);
 	}
 
 	/**

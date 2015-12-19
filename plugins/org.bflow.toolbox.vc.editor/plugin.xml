@@ -5,23 +5,6 @@
 -->
 
 <plugin>
-
-   <extension point="org.eclipse.ui.newWizards">
-      <!-- @generated vc -->
-      <category
-            id="org.eclipse.emf.ecore.Wizard.category.ID"
-            name="%_UI_Wizard_category"/>
-      <wizard
-            id="vcchart.presentation.VcchartModelWizardID"
-            name="%_UI_VcchartModelWizard_label"
-            class="vcchart.presentation.VcchartModelWizard"
-            category="org.eclipse.emf.ecore.Wizard.category.ID"
-            icon="icons/full/obj16/VcchartModelFile.gif">
-         <description>%_UI_VcchartModelWizard_description</description>
-         <selection class="org.eclipse.core.resources.IResource"/>
-      </wizard>
-   </extension>
-
    <extension point="org.eclipse.ui.editors">
       <!-- @generated vc -->
       <editor

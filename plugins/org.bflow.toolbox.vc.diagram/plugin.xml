@@ -43,11 +43,13 @@
    </extension>
 
    <extension point="org.eclipse.ui.newWizards" id="creation-wizard">
-      <?gmfgen generated="true"?>
+      <?gmfgen generated="false"?>
+      <category id="org.eclipse.ui.Bflow" name="Bflow* Toolbox">
+	  </category>
   	  <wizard
   	     name="%newWizardName"
   	     icon="icons/obj16/VcchartDiagramFile.gif"
-  	     category="org.eclipse.ui.Examples"
+  	     category="org.eclipse.ui.Bflow"
   	     class="vcchart.diagram.part.VcCreationWizard"
   	     id="vcchart.diagram.part.VcCreationWizardID">
   	  	 <description>%newWizardDesc</description>  
@@ -711,6 +713,23 @@
 
    <extension point="org.eclipse.ui.handlers" id="menu-handlers">
       <?gmfgen generated="true"?>
+   </extension>
+   <extension point="org.eclipse.ui.actionSets">
+      <?gmfgen generated="false"?>
+      <actionSet 
+			 label="%applicationActionSetLabel"
+			 visible="true"
+            id="org.bflow.toolbox.vc.diagram.ActionSet">
+         <action
+               class="vcchart.diagram.extensions.actions.NewVcDiagramWizardAction"
+               icon="icons/obj16/VcchartDiagramFile.gif"
+               id="org.bflow.toolbox.orgc.diagram.createNewVcWizardAction"
+               label="%VcCreationWizardTitle"
+               style="push"
+               toolbarPath="Normal"
+               tooltip="%VcCreationWizardTitle">
+         </action>
+      </actionSet>
    </extension>
 
    <!-- optionally, specify keybindings -->
