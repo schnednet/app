@@ -158,6 +158,7 @@
    <extension point="org.eclipse.ui.preferencePages" id="prefpages">
       <?gmfgen generated="true"?>
       <page
+      		category="org.bflow.toolbox.epc.diagram.bflowMainPage"
             id="org.bflow.toolbox.vc.diagram.general"
             name="%prefpage.org.bflow.toolbox.vc.diagram.general"
             class="vcchart.diagram.preferences.DiagramGeneralPreferencePage">
@@ -552,117 +553,8 @@
        </propertyTester>
    </extension>
 
-	   <extension point="org.eclipse.ui.navigator.viewer" id="navigator-viewbinding">
-      <?gmfgen generated="true"?>
-      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
-         <includes>
-            <contentExtension pattern="org.bflow.toolbox.vc.diagram.resourceContent"/>
-			<contentExtension pattern="org.bflow.toolbox.vc.diagram.domainResourceContent"/>
-            <contentExtension pattern="org.bflow.toolbox.vc.diagram.navigatorLinkHelper"/>
-         </includes>
-      </viewerContentBinding>
-      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
-         <includes>
-            <actionExtension pattern="org.bflow.toolbox.vc.diagram.navigatorActionProvider"/>
-         </includes>
-      </viewerActionBinding>
-   </extension>
 
-   <extension point="org.eclipse.ui.navigator.navigatorContent" id="navigator-content">
-      <?gmfgen generated="true"?>
-      <navigatorContent
-            id="org.bflow.toolbox.vc.diagram.resourceContent" 
-            name="%navigatorContentName" 
-            priority="normal" 
-            contentProvider="vcchart.diagram.navigator.VcNavigatorContentProvider" 
-            labelProvider="vcchart.diagram.navigator.VcNavigatorLabelProvider"
-            icon="icons/obj16/VcchartDiagramFile.gif"
-            activeByDefault="true">
-         <triggerPoints>
-            <or>
-	           <and>
-    	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="vc"/>
-               </and>
-               <instanceof value="vcchart.diagram.navigator.VcAbstractNavigatorItem"/>
-           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
-           	      <test property="org.bflow.toolbox.vc.diagram.isShortcut"/>
-           	   </adapt>
-            </or>
-         </triggerPoints>
-         <possibleChildren>
-            <or>
-         	   <instanceof value="vcchart.diagram.navigator.VcAbstractNavigatorItem"/>
-           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
-           	      <test property="org.bflow.toolbox.vc.diagram.isShortcut"/>
-           	   </adapt>
-            </or>
-         </possibleChildren>
-         <commonSorter 
-               id="org.bflow.toolbox.vc.diagram.navigatorSorter" 
-               class="vcchart.diagram.navigator.VcNavigatorSorter">
-            <parentExpression>
-               <or>
-	              <and>
-    	             <instanceof value="org.eclipse.core.resources.IFile"/>
-        	         <test property="org.eclipse.core.resources.extension" value="vc"/>
-                  </and>
-                  <instanceof value="vcchart.diagram.navigator.VcAbstractNavigatorItem"/>
-               </or>
-            </parentExpression>
-         </commonSorter>
-      </navigatorContent>
-      <navigatorContent
-            id="org.bflow.toolbox.vc.diagram.domainResourceContent" 
-            name="%domainNavigatorContentName" 
-            priority="normal" 
-            contentProvider="vcchart.diagram.navigator.VcDomainNavigatorContentProvider" 
-            labelProvider="vcchart.diagram.navigator.VcDomainNavigatorLabelProvider"
-            icon="icons/obj16/VcchartDiagramFile.gif"
-            activeByDefault="true">
-         <triggerPoints>
-            <or>
-	           <and>
-    	          <instanceof value="org.eclipse.core.resources.IFile"/>
-        	      <test property="org.eclipse.core.resources.extension" value="vcchart"/>
-               </and>
-               <instanceof value="vcchart.diagram.navigator.VcDomainNavigatorItem"/>
-            </or>
-         </triggerPoints>
-         <possibleChildren>
-            <instanceof value="vcchart.diagram.navigator.VcDomainNavigatorItem"/>
-         </possibleChildren>
-      </navigatorContent>
-      <actionProvider
-            id="org.bflow.toolbox.vc.diagram.navigatorActionProvider"
-            class="vcchart.diagram.navigator.VcNavigatorActionProvider">
-         <enablement>
-            <or>
-               <instanceof value="vcchart.diagram.navigator.VcAbstractNavigatorItem"/>
-           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
-           	      <test property="org.bflow.toolbox.vc.diagram.isShortcut"/>
-           	   </adapt>
-            </or>
-         </enablement>
-      </actionProvider>
-   </extension>
    
-	   <extension point="org.eclipse.ui.navigator.linkHelper" id="navigator-linkhelper">
-      <?gmfgen generated="true"?>
-      <linkHelper
-            id="org.bflow.toolbox.vc.diagram.navigatorLinkHelper"
-            class="vcchart.diagram.navigator.VcNavigatorLinkHelper">
-         <editorInputEnablement>
-            <and>
-               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
-               <test property="org.bflow.toolbox.vc.diagram.isURIEditorInput"/>
-            </and>
-         </editorInputEnablement>
-         <selectionEnablement>
-            <instanceof value="vcchart.diagram.navigator.VcAbstractNavigatorItem"/>
-         </selectionEnablement>
-      </linkHelper>
-   </extension>
    <extension point="org.eclipse.ui.commands" id="update-cmd">
       <?gmfgen generated="true"?>
       <command
