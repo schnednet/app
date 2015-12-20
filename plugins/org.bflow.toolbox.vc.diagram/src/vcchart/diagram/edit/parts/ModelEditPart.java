@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.bflow.toolbox.extensions.edit.parts.BflowDiagramEditPart;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
@@ -26,9 +27,9 @@ import vcchart.diagram.edit.policies.ModelItemSemanticEditPolicy;
 import vcchart.diagram.part.VcVisualIDRegistry;
 
 /**
- * @generated
+ * @generated NOT
  */
-public class ModelEditPart extends DiagramEditPart {
+public class ModelEditPart extends BflowDiagramEditPart {
 
 	/**
 	 * @generated

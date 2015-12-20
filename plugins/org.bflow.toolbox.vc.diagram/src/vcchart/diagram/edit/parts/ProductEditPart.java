@@ -3,8 +3,10 @@
  */
 package vcchart.diagram.edit.parts;
 
+import org.bflow.toolbox.extensions.edit.parts.BflowNodeEditPart;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.ScalablePolygonShape;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
@@ -33,9 +35,9 @@ import vcchart.diagram.edit.policies.ProductItemSemanticEditPolicy;
 import vcchart.diagram.part.VcVisualIDRegistry;
 
 /**
- * @generated
+ * @generated NOT
  */
-public class ProductEditPart extends ShapeNodeEditPart {
+public class ProductEditPart extends BflowNodeEditPart {
 
 	/**
 	 * @generated
@@ -213,42 +215,6 @@ public class ProductEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	protected void setForegroundColor(Color color) {
-		if (primaryShape != null) {
-			primaryShape.setForegroundColor(color);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setBackgroundColor(Color color) {
-		if (primaryShape != null) {
-			primaryShape.setBackgroundColor(color);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setLineWidth(int width) {
-		if (primaryShape instanceof Shape) {
-			((Shape) primaryShape).setLineWidth(width);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setLineType(int style) {
-		if (primaryShape instanceof Shape) {
-			((Shape) primaryShape).setLineStyle(style);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(VcVisualIDRegistry
 				.getType(ProductNameEditPart.VISUAL_ID));
@@ -298,8 +264,6 @@ public class ProductEditPart extends ShapeNodeEditPart {
 			this.addPoint(new Point(getMapMode().DPtoLP(0), getMapMode()
 					.DPtoLP(42)));
 			this.setFill(true);
-			this.setForegroundColor(THIS_FORE);
-			this.setBackgroundColor(THIS_BACK);
 			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100),
 					getMapMode().DPtoLP(50)));
 			this.setBorder(new MarginBorder(getMapMode().DPtoLP(5),
@@ -314,9 +278,10 @@ public class ProductEditPart extends ShapeNodeEditPart {
 		private void createContents() {
 
 			fFigureProductLabelFigure = new WrappingLabel();
-
-			fFigureProductLabelFigure.setText("Product");
-
+			fFigureProductLabelFigure.setText("");
+			fFigureProductLabelFigure.setTextWrap(true);
+			fFigureProductLabelFigure.setAlignment(PositionConstants.CENTER);
+			fFigureProductLabelFigure.setTextJustification(PositionConstants.CENTER);
 			this.add(fFigureProductLabelFigure);
 
 		}
@@ -330,14 +295,14 @@ public class ProductEditPart extends ShapeNodeEditPart {
 
 	}
 
-	/**
-	 * @generated
-	 */
-	static final Color THIS_FORE = new Color(null, 0, 0, 0);
+	@Override
+	public WrappingLabel[] getLabels() {
+		return new WrappingLabel[] { ((ProductFigure) primaryShape).getFigureProductLabelFigure() };
+	}
 
-	/**
-	 * @generated
-	 */
-	static final Color THIS_BACK = new Color(null, 0, 248, 0);
+	@Override
+	public IFigure getPrimaryFigure() {
+		return getPrimaryShape();
+	}
 
 }

@@ -3,8 +3,12 @@
  */
 package vcchart.diagram.edit.parts;
 
+import org.bflow.toolbox.extensions.edit.parts.BflowNodeEditPart;
+import org.eclipse.draw2d.CompoundBorder;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
@@ -32,9 +36,9 @@ import vcchart.diagram.edit.policies.ApplicationItemSemanticEditPolicy;
 import vcchart.diagram.part.VcVisualIDRegistry;
 
 /**
- * @generated
+ * @generated NOT
  */
-public class ApplicationEditPart extends ShapeNodeEditPart {
+public class ApplicationEditPart extends BflowNodeEditPart {
 
 	/**
 	 * @generated
@@ -213,42 +217,6 @@ public class ApplicationEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	protected void setForegroundColor(Color color) {
-		if (primaryShape != null) {
-			primaryShape.setForegroundColor(color);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setBackgroundColor(Color color) {
-		if (primaryShape != null) {
-			primaryShape.setBackgroundColor(color);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setLineWidth(int width) {
-		if (primaryShape instanceof Shape) {
-			((Shape) primaryShape).setLineWidth(width);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setLineType(int style) {
-		if (primaryShape instanceof Shape) {
-			((Shape) primaryShape).setLineStyle(style);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(VcVisualIDRegistry
 				.getType(ApplicationNameEditPart.VISUAL_ID));
@@ -268,7 +236,7 @@ public class ApplicationEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public class ApplicationFigure extends RectangleFigure {
 
@@ -278,27 +246,39 @@ public class ApplicationEditPart extends ShapeNodeEditPart {
 		private WrappingLabel fFigureApplicationLabelFigure;
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		public ApplicationFigure() {
-			this.setForegroundColor(THIS_FORE);
-			this.setBackgroundColor(THIS_BACK);
-			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100),
+			this.setLayoutManager(new StackLayout());
+			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(10),
 					getMapMode().DPtoLP(50)));
-			this.setBorder(new MarginBorder(getMapMode().DPtoLP(5),
-					getMapMode().DPtoLP(5), getMapMode().DPtoLP(5),
-					getMapMode().DPtoLP(5)));
+
+			this.setBorder(new CompoundBorder(new LineBorder(null, getMapMode()
+					.DPtoLP(1)), new CompoundBorder(new MarginBorder(
+					getMapMode().DPtoLP(-1), getMapMode().DPtoLP(3),
+					getMapMode().DPtoLP(-1), getMapMode().DPtoLP(3)),
+					new CompoundBorder(new LineBorder(null, getMapMode()
+							.DPtoLP(1)), new CompoundBorder(new MarginBorder(
+							getMapMode().DPtoLP(-1), getMapMode().DPtoLP(3),
+							getMapMode().DPtoLP(-1), getMapMode().DPtoLP(3)),
+							new LineBorder(null, getMapMode().DPtoLP(1)))))));
 			createContents();
 		}
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		private void createContents() {
 
 			fFigureApplicationLabelFigure = new WrappingLabel();
+			fFigureApplicationLabelFigure.setAlignment(PositionConstants.CENTER);
+			fFigureApplicationLabelFigure
+					.setTextJustification(PositionConstants.CENTER);
+			fFigureApplicationLabelFigure.setTextWrap(true);
 
-			fFigureApplicationLabelFigure.setText("Application");
+			fFigureApplicationLabelFigure.setBorder(new MarginBorder(
+					getMapMode().DPtoLP(4), getMapMode().DPtoLP(4),
+					getMapMode().DPtoLP(4), getMapMode().DPtoLP(4)));
 
 			this.add(fFigureApplicationLabelFigure);
 
@@ -313,14 +293,14 @@ public class ApplicationEditPart extends ShapeNodeEditPart {
 
 	}
 
-	/**
-	 * @generated
-	 */
-	static final Color THIS_FORE = new Color(null, 0, 0, 0);
+	@Override
+	public WrappingLabel[] getLabels() {
+		return new WrappingLabel[] { ((ApplicationFigure) primaryShape).getFigureApplicationLabelFigure() };
+	}
 
-	/**
-	 * @generated
-	 */
-	static final Color THIS_BACK = new Color(null, 22, 22, 22);
+	@Override
+	public IFigure getPrimaryFigure() {
+		return getPrimaryShape();
+	}
 
 }

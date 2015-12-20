@@ -5,7 +5,9 @@ package vcchart.diagram.providers;
 
 import java.util.ArrayList;
 
+import org.bflow.toolbox.extensions.edit.parts.BflowDiagramEditPart;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -40,6 +42,7 @@ import org.eclipse.gmf.runtime.notation.datatype.RelativeBendpoint;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontData;
 
 import vcchart.diagram.edit.parts.Activity1EditPart;
@@ -295,334 +298,284 @@ public class VcViewProvider extends AbstractProvider implements IViewProvider {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public Node createProduct_2001(EObject domainElement, View containerView,
 			int index, boolean persisted, PreferencesHint preferencesHint) {
 		Node node = NotationFactory.eINSTANCE.createNode();
-		node.getStyles()
-				.add(NotationFactory.eINSTANCE.createDescriptionStyle());
-		node.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createShapeStyle());
 		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
-		node.setType(VcVisualIDRegistry.getType(ProductEditPart.VISUAL_ID));
+		node.setType(VcVisualIDRegistry
+				.getType(ProductEditPart.VISUAL_ID));
 		ViewUtil.insertChildView(containerView, node, index, persisted);
 		node.setElement(domainElement);
 		stampShortcut(containerView, node);
-		// initializeFromPreferences 
-		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint
-				.getPreferenceStore();
-		FontStyle nodeFontStyle = (FontStyle) node
-				.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (nodeFontStyle != null) {
-			FontData fontData = PreferenceConverter.getFontData(prefStore,
-					IPreferenceConstants.PREF_DEFAULT_FONT);
-			nodeFontStyle.setFontName(fontData.getName());
-			nodeFontStyle.setFontHeight(fontData.getHeight());
-			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
-			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter
-					.getColor(prefStore, IPreferenceConstants.PREF_FONT_COLOR);
-			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
-					.intValue());
+
+		BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
+		Color fillcolor;
+		Color foregroundcolor;
+		if (diagramEditPart != null) {
+			fillcolor = diagramEditPart.getColorSchema().getBackground(ProductEditPart.class);
+			foregroundcolor = diagramEditPart.getColorSchema().getForeground(ProductEditPart.class);
+		} else {
+			fillcolor = ColorConstants.white;
+			foregroundcolor = ColorConstants.black;
 		}
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getFillStyle_FillColor(), FigureUtilities.RGBToInteger(fillcolor.getRGB()));
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getLineStyle_LineColor(), FigureUtilities.RGBToInteger(foregroundcolor.getRGB()));
 		Node label5001 = createLabel(node,
 				VcVisualIDRegistry.getType(ProductNameEditPart.VISUAL_ID));
 		return node;
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public Node createObjective_2002(EObject domainElement, View containerView,
 			int index, boolean persisted, PreferencesHint preferencesHint) {
 		Node node = NotationFactory.eINSTANCE.createNode();
-		node.getStyles()
-				.add(NotationFactory.eINSTANCE.createDescriptionStyle());
-		node.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createShapeStyle());
 		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
-		node.setType(VcVisualIDRegistry.getType(ObjectiveEditPart.VISUAL_ID));
+		node.setType(VcVisualIDRegistry
+				.getType(ObjectiveEditPart.VISUAL_ID));
 		ViewUtil.insertChildView(containerView, node, index, persisted);
 		node.setElement(domainElement);
 		stampShortcut(containerView, node);
-		// initializeFromPreferences 
-		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint
-				.getPreferenceStore();
-		FontStyle nodeFontStyle = (FontStyle) node
-				.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (nodeFontStyle != null) {
-			FontData fontData = PreferenceConverter.getFontData(prefStore,
-					IPreferenceConstants.PREF_DEFAULT_FONT);
-			nodeFontStyle.setFontName(fontData.getName());
-			nodeFontStyle.setFontHeight(fontData.getHeight());
-			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
-			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter
-					.getColor(prefStore, IPreferenceConstants.PREF_FONT_COLOR);
-			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
-					.intValue());
+
+		BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
+		Color fillcolor;
+		Color foregroundcolor;
+		if (diagramEditPart != null) {
+			fillcolor = diagramEditPart.getColorSchema().getBackground(ObjectiveEditPart.class);
+			foregroundcolor = diagramEditPart.getColorSchema().getForeground(ObjectiveEditPart.class);
+		} else {
+			fillcolor = ColorConstants.white;
+			foregroundcolor = ColorConstants.black;
 		}
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getFillStyle_FillColor(), FigureUtilities.RGBToInteger(fillcolor.getRGB()));
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getLineStyle_LineColor(), FigureUtilities.RGBToInteger(foregroundcolor.getRGB()));
 		Node label5002 = createLabel(node,
 				VcVisualIDRegistry.getType(ObjectiveNameEditPart.VISUAL_ID));
 		return node;
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public Node createActivity1_2003(EObject domainElement, View containerView,
 			int index, boolean persisted, PreferencesHint preferencesHint) {
 		Node node = NotationFactory.eINSTANCE.createNode();
-		node.getStyles()
-				.add(NotationFactory.eINSTANCE.createDescriptionStyle());
-		node.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createShapeStyle());
 		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
-		node.setType(VcVisualIDRegistry.getType(Activity1EditPart.VISUAL_ID));
+		node.setType(VcVisualIDRegistry
+				.getType(Activity1EditPart.VISUAL_ID));
 		ViewUtil.insertChildView(containerView, node, index, persisted);
 		node.setElement(domainElement);
 		stampShortcut(containerView, node);
-		// initializeFromPreferences 
-		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint
-				.getPreferenceStore();
-		FontStyle nodeFontStyle = (FontStyle) node
-				.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (nodeFontStyle != null) {
-			FontData fontData = PreferenceConverter.getFontData(prefStore,
-					IPreferenceConstants.PREF_DEFAULT_FONT);
-			nodeFontStyle.setFontName(fontData.getName());
-			nodeFontStyle.setFontHeight(fontData.getHeight());
-			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
-			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter
-					.getColor(prefStore, IPreferenceConstants.PREF_FONT_COLOR);
-			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
-					.intValue());
+
+		BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
+		Color fillcolor;
+		Color foregroundcolor;
+		if (diagramEditPart != null) {
+			fillcolor = diagramEditPart.getColorSchema().getBackground(Activity1EditPart.class);
+			foregroundcolor = diagramEditPart.getColorSchema().getForeground(Activity1EditPart.class);
+		} else {
+			fillcolor = ColorConstants.white;
+			foregroundcolor = ColorConstants.black;
 		}
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getFillStyle_FillColor(), FigureUtilities.RGBToInteger(fillcolor.getRGB()));
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getLineStyle_LineColor(), FigureUtilities.RGBToInteger(foregroundcolor.getRGB()));
 		Node label5003 = createLabel(node,
 				VcVisualIDRegistry.getType(Activity1NameEditPart.VISUAL_ID));
 		return node;
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public Node createActivity2_2004(EObject domainElement, View containerView,
 			int index, boolean persisted, PreferencesHint preferencesHint) {
 		Node node = NotationFactory.eINSTANCE.createNode();
-		node.getStyles()
-				.add(NotationFactory.eINSTANCE.createDescriptionStyle());
-		node.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createShapeStyle());
 		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
-		node.setType(VcVisualIDRegistry.getType(Activity2EditPart.VISUAL_ID));
+		node.setType(VcVisualIDRegistry
+				.getType(Activity2EditPart.VISUAL_ID));
 		ViewUtil.insertChildView(containerView, node, index, persisted);
 		node.setElement(domainElement);
 		stampShortcut(containerView, node);
-		// initializeFromPreferences 
-		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint
-				.getPreferenceStore();
-		FontStyle nodeFontStyle = (FontStyle) node
-				.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (nodeFontStyle != null) {
-			FontData fontData = PreferenceConverter.getFontData(prefStore,
-					IPreferenceConstants.PREF_DEFAULT_FONT);
-			nodeFontStyle.setFontName(fontData.getName());
-			nodeFontStyle.setFontHeight(fontData.getHeight());
-			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
-			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter
-					.getColor(prefStore, IPreferenceConstants.PREF_FONT_COLOR);
-			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
-					.intValue());
+
+		BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
+		Color fillcolor;
+		Color foregroundcolor;
+		if (diagramEditPart != null) {
+			fillcolor = diagramEditPart.getColorSchema().getBackground(Activity2EditPart.class);
+			foregroundcolor = diagramEditPart.getColorSchema().getForeground(Activity2EditPart.class);
+		} else {
+			fillcolor = ColorConstants.white;
+			foregroundcolor = ColorConstants.black;
 		}
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getFillStyle_FillColor(), FigureUtilities.RGBToInteger(fillcolor.getRGB()));
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getLineStyle_LineColor(), FigureUtilities.RGBToInteger(foregroundcolor.getRGB()));
 		Node label5004 = createLabel(node,
 				VcVisualIDRegistry.getType(Activity2NameEditPart.VISUAL_ID));
 		return node;
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public Node createCluster_2005(EObject domainElement, View containerView,
 			int index, boolean persisted, PreferencesHint preferencesHint) {
 		Node node = NotationFactory.eINSTANCE.createNode();
-		node.getStyles()
-				.add(NotationFactory.eINSTANCE.createDescriptionStyle());
-		node.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createShapeStyle());
 		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
-		node.setType(VcVisualIDRegistry.getType(ClusterEditPart.VISUAL_ID));
+		node.setType(VcVisualIDRegistry
+				.getType(ClusterEditPart.VISUAL_ID));
 		ViewUtil.insertChildView(containerView, node, index, persisted);
 		node.setElement(domainElement);
 		stampShortcut(containerView, node);
-		// initializeFromPreferences 
-		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint
-				.getPreferenceStore();
-		FontStyle nodeFontStyle = (FontStyle) node
-				.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (nodeFontStyle != null) {
-			FontData fontData = PreferenceConverter.getFontData(prefStore,
-					IPreferenceConstants.PREF_DEFAULT_FONT);
-			nodeFontStyle.setFontName(fontData.getName());
-			nodeFontStyle.setFontHeight(fontData.getHeight());
-			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
-			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter
-					.getColor(prefStore, IPreferenceConstants.PREF_FONT_COLOR);
-			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
-					.intValue());
+
+		BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
+		Color fillcolor;
+		Color foregroundcolor;
+		if (diagramEditPart != null) {
+			fillcolor = diagramEditPart.getColorSchema().getBackground(ClusterEditPart.class);
+			foregroundcolor = diagramEditPart.getColorSchema().getForeground(ClusterEditPart.class);
+		} else {
+			fillcolor = ColorConstants.white;
+			foregroundcolor = ColorConstants.black;
 		}
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getFillStyle_FillColor(), FigureUtilities.RGBToInteger(fillcolor.getRGB()));
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getLineStyle_LineColor(), FigureUtilities.RGBToInteger(foregroundcolor.getRGB()));
 		Node label5005 = createLabel(node,
 				VcVisualIDRegistry.getType(ClusterNameEditPart.VISUAL_ID));
-		return node;
+	return node;
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public Node createTechnicalTerm_2006(EObject domainElement,
 			View containerView, int index, boolean persisted,
 			PreferencesHint preferencesHint) {
 		Node node = NotationFactory.eINSTANCE.createNode();
-		node.getStyles()
-				.add(NotationFactory.eINSTANCE.createDescriptionStyle());
-		node.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
-		node.getStyles().add(NotationFactory.eINSTANCE.createFillStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createShapeStyle());
 		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
 		node.setType(VcVisualIDRegistry
 				.getType(TechnicalTermEditPart.VISUAL_ID));
 		ViewUtil.insertChildView(containerView, node, index, persisted);
 		node.setElement(domainElement);
 		stampShortcut(containerView, node);
-		// initializeFromPreferences 
-		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint
-				.getPreferenceStore();
-		FontStyle nodeFontStyle = (FontStyle) node
-				.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (nodeFontStyle != null) {
-			FontData fontData = PreferenceConverter.getFontData(prefStore,
-					IPreferenceConstants.PREF_DEFAULT_FONT);
-			nodeFontStyle.setFontName(fontData.getName());
-			nodeFontStyle.setFontHeight(fontData.getHeight());
-			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
-			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter
-					.getColor(prefStore, IPreferenceConstants.PREF_FONT_COLOR);
-			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
-					.intValue());
+
+		BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
+		Color fillcolor;
+		Color foregroundcolor;
+		if (diagramEditPart != null) {
+			fillcolor = diagramEditPart.getColorSchema().getBackground(TechnicalTermEditPart.class);
+			foregroundcolor = diagramEditPart.getColorSchema().getForeground(TechnicalTermEditPart.class);
+		} else {
+			fillcolor = ColorConstants.white;
+			foregroundcolor = ColorConstants.black;
 		}
-		org.eclipse.swt.graphics.RGB fillRGB = PreferenceConverter.getColor(
-				prefStore, IPreferenceConstants.PREF_FILL_COLOR);
-		ViewUtil.setStructuralFeatureValue(node,
-				NotationPackage.eINSTANCE.getFillStyle_FillColor(),
-				FigureUtilities.RGBToInteger(fillRGB));
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getFillStyle_FillColor(), FigureUtilities.RGBToInteger(fillcolor.getRGB()));
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getLineStyle_LineColor(), FigureUtilities.RGBToInteger(foregroundcolor.getRGB()));
 		Node label5006 = createLabel(node,
 				VcVisualIDRegistry.getType(TechnicalTermNameEditPart.VISUAL_ID));
 		return node;
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public Node createParticipant_2007(EObject domainElement,
 			View containerView, int index, boolean persisted,
 			PreferencesHint preferencesHint) {
 		Node node = NotationFactory.eINSTANCE.createNode();
-		node.getStyles()
-				.add(NotationFactory.eINSTANCE.createDescriptionStyle());
-		node.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createShapeStyle());
 		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
-		node.setType(VcVisualIDRegistry.getType(ParticipantEditPart.VISUAL_ID));
+		node.setType(VcVisualIDRegistry
+				.getType(ParticipantEditPart.VISUAL_ID));
 		ViewUtil.insertChildView(containerView, node, index, persisted);
 		node.setElement(domainElement);
 		stampShortcut(containerView, node);
-		// initializeFromPreferences 
-		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint
-				.getPreferenceStore();
-		FontStyle nodeFontStyle = (FontStyle) node
-				.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (nodeFontStyle != null) {
-			FontData fontData = PreferenceConverter.getFontData(prefStore,
-					IPreferenceConstants.PREF_DEFAULT_FONT);
-			nodeFontStyle.setFontName(fontData.getName());
-			nodeFontStyle.setFontHeight(fontData.getHeight());
-			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
-			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter
-					.getColor(prefStore, IPreferenceConstants.PREF_FONT_COLOR);
-			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
-					.intValue());
+
+		BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
+		Color fillcolor;
+		Color foregroundcolor;
+		if (diagramEditPart != null) {
+			fillcolor = diagramEditPart.getColorSchema().getBackground(ParticipantEditPart.class);
+			foregroundcolor = diagramEditPart.getColorSchema().getForeground(ParticipantEditPart.class);
+		} else {
+			fillcolor = ColorConstants.white;
+			foregroundcolor = ColorConstants.black;
 		}
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getFillStyle_FillColor(), FigureUtilities.RGBToInteger(fillcolor.getRGB()));
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getLineStyle_LineColor(), FigureUtilities.RGBToInteger(foregroundcolor.getRGB()));
+		
 		Node label5007 = createLabel(node,
 				VcVisualIDRegistry.getType(ParticipantNameEditPart.VISUAL_ID));
 		return node;
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public Node createApplication_2008(EObject domainElement,
 			View containerView, int index, boolean persisted,
 			PreferencesHint preferencesHint) {
 		Node node = NotationFactory.eINSTANCE.createNode();
-		node.getStyles()
-				.add(NotationFactory.eINSTANCE.createDescriptionStyle());
-		node.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createShapeStyle());
 		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
-		node.setType(VcVisualIDRegistry.getType(ApplicationEditPart.VISUAL_ID));
+		node.setType(VcVisualIDRegistry
+				.getType(ApplicationEditPart.VISUAL_ID));
 		ViewUtil.insertChildView(containerView, node, index, persisted);
 		node.setElement(domainElement);
 		stampShortcut(containerView, node);
-		// initializeFromPreferences 
-		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint
-				.getPreferenceStore();
-		FontStyle nodeFontStyle = (FontStyle) node
-				.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (nodeFontStyle != null) {
-			FontData fontData = PreferenceConverter.getFontData(prefStore,
-					IPreferenceConstants.PREF_DEFAULT_FONT);
-			nodeFontStyle.setFontName(fontData.getName());
-			nodeFontStyle.setFontHeight(fontData.getHeight());
-			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
-			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter
-					.getColor(prefStore, IPreferenceConstants.PREF_FONT_COLOR);
-			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
-					.intValue());
+
+		BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
+		Color fillcolor;
+		Color foregroundcolor;
+		if (diagramEditPart != null) {
+			// Nutze das Farbschema der Funktionen aus den EPC
+			fillcolor = diagramEditPart.getColorSchema().getBackground(ApplicationEditPart.class);
+			foregroundcolor = diagramEditPart.getColorSchema().getForeground(ApplicationEditPart.class);
+		} else {
+			fillcolor = ColorConstants.white;
+			foregroundcolor = ColorConstants.black;
 		}
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getFillStyle_FillColor(), FigureUtilities.RGBToInteger(fillcolor.getRGB()));
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getLineStyle_LineColor(), FigureUtilities.RGBToInteger(foregroundcolor.getRGB()));
 		Node label5008 = createLabel(node,
 				VcVisualIDRegistry.getType(ApplicationNameEditPart.VISUAL_ID));
 		return node;
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public Node createDocument_2009(EObject domainElement, View containerView,
 			int index, boolean persisted, PreferencesHint preferencesHint) {
 		Node node = NotationFactory.eINSTANCE.createNode();
-		node.getStyles()
-				.add(NotationFactory.eINSTANCE.createDescriptionStyle());
-		node.getStyles().add(NotationFactory.eINSTANCE.createFontStyle());
+		node.getStyles().add(NotationFactory.eINSTANCE.createShapeStyle());
 		node.setLayoutConstraint(NotationFactory.eINSTANCE.createBounds());
-		node.setType(VcVisualIDRegistry.getType(DocumentEditPart.VISUAL_ID));
+		node.setType(VcVisualIDRegistry
+				.getType(DocumentEditPart.VISUAL_ID));
 		ViewUtil.insertChildView(containerView, node, index, persisted);
 		node.setElement(domainElement);
 		stampShortcut(containerView, node);
-		// initializeFromPreferences 
-		final IPreferenceStore prefStore = (IPreferenceStore) preferencesHint
-				.getPreferenceStore();
-		FontStyle nodeFontStyle = (FontStyle) node
-				.getStyle(NotationPackage.Literals.FONT_STYLE);
-		if (nodeFontStyle != null) {
-			FontData fontData = PreferenceConverter.getFontData(prefStore,
-					IPreferenceConstants.PREF_DEFAULT_FONT);
-			nodeFontStyle.setFontName(fontData.getName());
-			nodeFontStyle.setFontHeight(fontData.getHeight());
-			nodeFontStyle.setBold((fontData.getStyle() & SWT.BOLD) != 0);
-			nodeFontStyle.setItalic((fontData.getStyle() & SWT.ITALIC) != 0);
-			org.eclipse.swt.graphics.RGB fontRGB = PreferenceConverter
-					.getColor(prefStore, IPreferenceConstants.PREF_FONT_COLOR);
-			nodeFontStyle.setFontColor(FigureUtilities.RGBToInteger(fontRGB)
-					.intValue());
+
+		BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
+		Color fillcolor;
+		Color foregroundcolor;
+		if (diagramEditPart != null) {
+			fillcolor = diagramEditPart.getColorSchema().getBackground(DocumentEditPart.class);
+			foregroundcolor = diagramEditPart.getColorSchema().getForeground(DocumentEditPart.class);
+		} else {
+			fillcolor = ColorConstants.white;
+			foregroundcolor = ColorConstants.black;
 		}
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getFillStyle_FillColor(), FigureUtilities.RGBToInteger(fillcolor.getRGB()));
+		ViewUtil.setStructuralFeatureValue(node, NotationPackage.eINSTANCE.getLineStyle_LineColor(), FigureUtilities.RGBToInteger(foregroundcolor.getRGB()));
 		Node label5009 = createLabel(node,
 				VcVisualIDRegistry.getType(DocumentNameEditPart.VISUAL_ID));
 		return node;

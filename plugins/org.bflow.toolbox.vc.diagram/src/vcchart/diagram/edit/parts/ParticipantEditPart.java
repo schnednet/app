@@ -3,12 +3,19 @@
  */
 package vcchart.diagram.edit.parts;
 
+import java.util.List;
+
+import org.bflow.toolbox.extensions.edit.parts.BflowNodeEditPart;
 import org.eclipse.draw2d.Ellipse;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.gef.EditPart;
@@ -32,9 +39,9 @@ import vcchart.diagram.edit.policies.ParticipantItemSemanticEditPolicy;
 import vcchart.diagram.part.VcVisualIDRegistry;
 
 /**
- * @generated
+ * @generated NOT
  */
-public class ParticipantEditPart extends ShapeNodeEditPart {
+public class ParticipantEditPart extends BflowNodeEditPart {
 
 	/**
 	 * @generated
@@ -210,41 +217,6 @@ public class ParticipantEditPart extends ShapeNodeEditPart {
 		return super.getContentPane();
 	}
 
-	/**
-	 * @generated
-	 */
-	protected void setForegroundColor(Color color) {
-		if (primaryShape != null) {
-			primaryShape.setForegroundColor(color);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setBackgroundColor(Color color) {
-		if (primaryShape != null) {
-			primaryShape.setBackgroundColor(color);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setLineWidth(int width) {
-		if (primaryShape instanceof Shape) {
-			((Shape) primaryShape).setLineWidth(width);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setLineType(int style) {
-		if (primaryShape instanceof Shape) {
-			((Shape) primaryShape).setLineStyle(style);
-		}
-	}
 
 	/**
 	 * @generated
@@ -268,7 +240,7 @@ public class ParticipantEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public class ParticipantFigure extends Ellipse {
 
@@ -276,32 +248,92 @@ public class ParticipantEditPart extends ShapeNodeEditPart {
 		 * @generated
 		 */
 		private WrappingLabel fFigureParticipantLabelFigure;
+		
+		/**
+		 * @generated NOT
+		 */
+		RectangleFigure nameContainer = null;
+		private int tWidth = 1;
+		private int tHeight = 1;
+		private final int xInsets = 15;
+		private final int yInsets = 10;
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		public ParticipantFigure() {
-			this.setForegroundColor(THIS_FORE);
-			this.setBackgroundColor(THIS_BACK);
-			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100),
-					getMapMode().DPtoLP(50)));
-			this.setBorder(new MarginBorder(getMapMode().DPtoLP(5),
-					getMapMode().DPtoLP(5), getMapMode().DPtoLP(5),
-					getMapMode().DPtoLP(5)));
+			this.setLayoutManager(new StackLayout());
+
+			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100),getMapMode().DPtoLP(50)));
+			this.setBorder(new OrganisationUnitBorder());
+			this.tWidth = this.getPreferredSize().width;
+			this.tHeight = this.getPreferredSize().height;
 			createContents();
 		}
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		private void createContents() {
+			RectangleFigure nameContainer0 = new RectangleFigure();
+			nameContainer0.setFill(false);
+			nameContainer0.setOutline(false);
 
+			this.add(nameContainer0);
+			layoutLabelContainer(nameContainer0, xInsets, yInsets);
 			fFigureParticipantLabelFigure = new WrappingLabel();
+			fFigureParticipantLabelFigure.setText("");
+			fFigureParticipantLabelFigure.setAlignment(PositionConstants.CENTER);
+			fFigureParticipantLabelFigure.setTextJustification(PositionConstants.CENTER);
+			fFigureParticipantLabelFigure.setTextWrap(true);
 
-			fFigureParticipantLabelFigure.setText("Participant");
+			this.add(nameContainer0);
 
-			this.add(fFigureParticipantLabelFigure);
+			nameContainer = nameContainer0;
+			nameContainer0.add(fFigureParticipantLabelFigure);
+		}
 
+		/**
+		 * @generated NOT
+		 */
+		private void layoutLabelContainer(Shape figure, final int xOffset,
+				final int yOffset) {
+			StackLayout layoutEventPolygonFigure0 = new StackLayout() {
+				@Override
+				public void layout(IFigure figure) {
+					
+					Rectangle r = new Rectangle(figure.getBounds().x + xOffset,
+							figure.getBounds().y + yOffset,
+							figure.getBounds().width - 2 * xOffset, figure
+									.getBounds().height
+									- 2 * yOffset);
+					List<?> children = figure.getChildren();
+					IFigure child;
+					for (int i = 0; i < children.size(); i++) {
+						child = (IFigure) children.get(i);
+						child.setBounds(r);
+					}
+				}
+			};
+			figure.setLayoutManager(layoutEventPolygonFigure0);
+		}
+		
+		/**
+		 * @generated NOT
+		 */
+		@Override
+		protected void fillShape(Graphics graphics) {
+			super.fillShape(graphics);
+
+			Rectangle actualBounds = getBounds();
+
+			float xScale = (float) actualBounds.width / tWidth;
+			float yScale = (float) actualBounds.height / tHeight;
+
+			if (nameContainer != null) {
+				layoutLabelContainer(nameContainer, (int) (xScale * xInsets),
+						(int) (yScale * yInsets));
+			}
 		}
 
 		/**
@@ -310,17 +342,14 @@ public class ParticipantEditPart extends ShapeNodeEditPart {
 		public WrappingLabel getFigureParticipantLabelFigure() {
 			return fFigureParticipantLabelFigure;
 		}
-
 	}
 
-	/**
-	 * @generated
-	 */
-	static final Color THIS_FORE = new Color(null, 0, 0, 0);
+	public IFigure getPrimaryFigure() {
+		return getPrimaryShape();
+	}
 
-	/**
-	 * @generated
-	 */
-	static final Color THIS_BACK = new Color(null, 22, 22, 22);
+	public WrappingLabel[] getLabels() {
+		return new WrappingLabel[] { ((ParticipantFigure) primaryShape).getFigureParticipantLabelFigure()};
+	}
 
 }

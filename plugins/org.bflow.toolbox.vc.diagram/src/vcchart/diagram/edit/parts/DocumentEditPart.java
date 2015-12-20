@@ -3,12 +3,22 @@
  */
 package vcchart.diagram.edit.parts;
 
+import java.util.List;
+
+import org.bflow.toolbox.extensions.edit.parts.BflowDiagramEditPart;
+import org.bflow.toolbox.extensions.edit.parts.BflowNodeEditPart;
+import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.Shape;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Point;
+import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.gef.EditPart;
@@ -32,9 +42,9 @@ import vcchart.diagram.edit.policies.DocumentItemSemanticEditPolicy;
 import vcchart.diagram.part.VcVisualIDRegistry;
 
 /**
- * @generated
+ * @generated NOT
  */
-public class DocumentEditPart extends ShapeNodeEditPart {
+public class DocumentEditPart extends BflowNodeEditPart {
 
 	/**
 	 * @generated
@@ -212,42 +222,6 @@ public class DocumentEditPart extends ShapeNodeEditPart {
 	/**
 	 * @generated
 	 */
-	protected void setForegroundColor(Color color) {
-		if (primaryShape != null) {
-			primaryShape.setForegroundColor(color);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setBackgroundColor(Color color) {
-		if (primaryShape != null) {
-			primaryShape.setBackgroundColor(color);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setLineWidth(int width) {
-		if (primaryShape instanceof Shape) {
-			((Shape) primaryShape).setLineWidth(width);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
-	protected void setLineType(int style) {
-		if (primaryShape instanceof Shape) {
-			((Shape) primaryShape).setLineStyle(style);
-		}
-	}
-
-	/**
-	 * @generated
-	 */
 	public EditPart getPrimaryChildEditPart() {
 		return getChildBySemanticHint(VcVisualIDRegistry
 				.getType(DocumentNameEditPart.VISUAL_ID));
@@ -267,7 +241,7 @@ public class DocumentEditPart extends ShapeNodeEditPart {
 	}
 
 	/**
-	 * @generated
+	 * @generated NOT
 	 */
 	public class DocumentFigure extends RectangleFigure {
 
@@ -275,32 +249,183 @@ public class DocumentEditPart extends ShapeNodeEditPart {
 		 * @generated
 		 */
 		private WrappingLabel fFigureDocumentLabelFigure;
+		
+		/**
+		 * @generated NOT
+		 */
+		private IFigure documentPolygonFigure;
+		private final int diff = 25;
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		public DocumentFigure() {
-			this.setForegroundColor(THIS_FORE);
-			this.setBackgroundColor(THIS_BACK);
-			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(100),
-					getMapMode().DPtoLP(50)));
-			this.setBorder(new MarginBorder(getMapMode().DPtoLP(5),
-					getMapMode().DPtoLP(5), getMapMode().DPtoLP(5),
-					getMapMode().DPtoLP(5)));
+			this.setLayoutManager(new StackLayout());
+			this.setFill(false);
+			this.setOutline(false);
+			this.setPreferredSize(new Dimension(getMapMode().DPtoLP(101),getMapMode().DPtoLP(61)));
 			createContents();
 		}
 
 		/**
-		 * @generated
+		 * @generated NOT
 		 */
 		private void createContents() {
+			
+			class DocumentPolygonFigure0Class extends Shape {
+				/**
+				 * @generated
+				 */
+				private final PointList myTemplate = new PointList();
+				/**
+				 * @generated
+				 */
+				private Rectangle myTemplateBounds;
+
+				/**
+				 * @generated
+				 */
+				public void addPoint(Point point) {
+					myTemplate.addPoint(point);
+					myTemplateBounds = null;
+				}
+
+				/**
+				 * @generated
+				 */
+				protected void fillShape(Graphics graphics) {
+					Rectangle bounds = getBounds();
+					graphics.pushState();
+					graphics.translate(bounds.x, bounds.y);
+					graphics.fillPolygon(scalePointList());
+					graphics.popState();
+				}
+
+				/**
+				 * @generated
+				 */
+				protected void outlineShape(Graphics graphics) {
+					Rectangle bounds = getBounds();
+					graphics.pushState();
+					graphics.translate(bounds.x, bounds.y);
+					graphics.drawPolygon(scalePointList());
+					graphics.popState();
+				}
+
+				/**
+				 * @generated
+				 */
+				private Rectangle getTemplateBounds() {
+					if (myTemplateBounds == null) {
+						myTemplateBounds = myTemplate.getBounds().getCopy()
+								.union(0, 0);
+						//just safety -- we are going to use this as divider 
+						if (myTemplateBounds.width < 1) {
+							myTemplateBounds.width = 1;
+						}
+						if (myTemplateBounds.height < 1) {
+							myTemplateBounds.height = 1;
+						}
+					}
+					return myTemplateBounds;
+				}
+
+				/**
+				 * @generated NOT
+				 */
+				private int[] scalePointList() {
+					Rectangle pointsBounds = getTemplateBounds();
+					Rectangle actualBounds = getBounds();
+
+					float xScale = ((float) actualBounds.width)
+							/ pointsBounds.width;
+					float yScale = ((float) actualBounds.height)
+							/ pointsBounds.height;
+
+					if (xScale == 1 && yScale == 1) {
+						return myTemplate.toIntArray();
+					}
+					int[] scaled = (int[]) myTemplate.toIntArray().clone();
+					for (int i = 0; i < scaled.length; i += 2) {
+						scaled[i] = (int) Math.floor(scaled[i] * xScale);
+						scaled[i + 1] = (int) Math
+								.floor(scaled[i + 1] * yScale);
+					}
+					layoutLabelContainer(this, (int) (diff * yScale));
+					return scaled;
+				}
+			};
+
+			DocumentPolygonFigure0Class documentPolygonFigure0 = new DocumentPolygonFigure0Class();
+
+			documentPolygonFigure0.addPoint(new Point(getMapMode().DPtoLP(0),
+					getMapMode().DPtoLP(0)));
+			documentPolygonFigure0.addPoint(new Point(getMapMode().DPtoLP(0),
+					getMapMode().DPtoLP(50)));
+			documentPolygonFigure0.addPoint(new Point(getMapMode().DPtoLP(20),
+					getMapMode().DPtoLP(60)));
+			documentPolygonFigure0.addPoint(new Point(getMapMode().DPtoLP(80),
+					getMapMode().DPtoLP(40)));
+			documentPolygonFigure0.addPoint(new Point(getMapMode().DPtoLP(100),
+					getMapMode().DPtoLP(50)));
+			documentPolygonFigure0.addPoint(new Point(getMapMode().DPtoLP(100),
+					getMapMode().DPtoLP(0)));
+			documentPolygonFigure0.setFill(true);
+
+			BflowDiagramEditPart diagramEditPart = 
+				BflowDiagramEditPart.getCurrentViewer();
+			if(diagramEditPart != null){
+				documentPolygonFigure0.setBackgroundColor(
+						diagramEditPart.getColorSchema().getBackground(
+								DocumentEditPart.class));
+				documentPolygonFigure0.setForegroundColor(
+						diagramEditPart.getColorSchema().getForeground(
+								DocumentEditPart.class));
+			}
+			else{
+				documentPolygonFigure0.setBackgroundColor(ColorConstants.white);
+				documentPolygonFigure0.setForegroundColor(
+						ColorConstants.black);
+			}
+
+			this.add(documentPolygonFigure0);
+			documentPolygonFigure = documentPolygonFigure0;
+			layoutLabelContainer(documentPolygonFigure0, diff);
 
 			fFigureDocumentLabelFigure = new WrappingLabel();
+			fFigureDocumentLabelFigure.setText("");
+			fFigureDocumentLabelFigure.setAlignment(PositionConstants.CENTER);
+			fFigureDocumentLabelFigure
+					.setTextJustification(PositionConstants.CENTER);
+			fFigureDocumentLabelFigure.setTextWrap(true);
+			fFigureDocumentLabelFigure.setBorder(new MarginBorder(getMapMode()
+					.DPtoLP(4), getMapMode().DPtoLP(4), getMapMode().DPtoLP(4),
+					getMapMode().DPtoLP(4)));
 
-			fFigureDocumentLabelFigure.setText("Document");
-
-			this.add(fFigureDocumentLabelFigure);
-
+			documentPolygonFigure0.add(fFigureDocumentLabelFigure);
+		}
+		
+		private void layoutLabelContainer(Shape figure, final int height) {
+			final int insets = 4;
+			StackLayout layoutDocumentPolygonFigure0 = new StackLayout() {
+				@SuppressWarnings("unchecked")
+				@Override
+				public void layout(IFigure figure) {
+					// TODO Auto-generated method stub
+					Rectangle r = new Rectangle(figure.getBounds().x + insets,
+							figure.getBounds().y + insets,
+							figure.getBounds().width - 2 * insets, figure
+									.getBounds().height
+									- height - 2 * insets);
+					List children = figure.getChildren();
+					IFigure child;
+					for (int i = 0; i < children.size(); i++) {
+						child = (IFigure) children.get(i);
+						child.setBounds(r);
+					}
+				}
+			};
+			figure.setLayoutManager(layoutDocumentPolygonFigure0);
 		}
 
 		/**
@@ -309,17 +434,21 @@ public class DocumentEditPart extends ShapeNodeEditPart {
 		public WrappingLabel getFigureDocumentLabelFigure() {
 			return fFigureDocumentLabelFigure;
 		}
+		
+		public IFigure getDocumentPolygonFigure() {
+			return documentPolygonFigure;
+		}
 
 	}
 
-	/**
-	 * @generated
-	 */
-	static final Color THIS_FORE = new Color(null, 0, 0, 0);
+	@Override
+	public WrappingLabel[] getLabels() {
+		return new WrappingLabel[] { ((DocumentFigure) primaryShape).getFigureDocumentLabelFigure() };
+	}
 
-	/**
-	 * @generated
-	 */
-	static final Color THIS_BACK = new Color(null, 22, 22, 22);
+	@Override
+	public IFigure getPrimaryFigure() {
+		return getPrimaryShape().getDocumentPolygonFigure();
+	}
 
 }
