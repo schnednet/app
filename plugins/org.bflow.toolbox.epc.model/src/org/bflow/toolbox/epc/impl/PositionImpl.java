@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class PositionImpl extends ElementImpl implements Position {
+public class PositionImpl extends EpcNodeImpl implements Position {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
