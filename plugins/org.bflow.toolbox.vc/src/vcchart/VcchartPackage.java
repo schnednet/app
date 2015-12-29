@@ -405,6 +405,11 @@ public interface VcchartPackage extends EPackage {
 	 * @ordered
 	 */
 	int ACTIVITY1_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
+	
+	/**
+	 * @generated NOT
+	 */
+	int ACTIVITY1__SUBDIAGRAM = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link vcchart.impl.Activity2Impl <em>Activity2</em>}' class.
@@ -442,6 +447,11 @@ public interface VcchartPackage extends EPackage {
 	 * @ordered
 	 */
 	int ACTIVITY2_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
+	
+	/**
+	 * @generated NOT
+	 */
+	int ACTIVITY2__SUBDIAGRAM = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link vcchart.impl.ProductImpl <em>Product</em>}' class.
@@ -1063,6 +1073,11 @@ public interface VcchartPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getActivity1();
+	
+	/**
+	 * @generated NOT
+	 */
+	EAttribute getActivity1_Subdiagram();
 
 	/**
 	 * Returns the meta object for class '{@link vcchart.Activity2 <em>Activity2</em>}'.
@@ -1073,6 +1088,11 @@ public interface VcchartPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getActivity2();
+	
+	/**
+	 * @generated NOT
+	 */
+	EAttribute getActivity2_Subdiagram();
 
 	/**
 	 * Returns the meta object for class '{@link vcchart.Product <em>Product</em>}'.
@@ -1446,6 +1466,11 @@ public interface VcchartPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ACTIVITY1 = eINSTANCE.getActivity1();
+		
+		/**
+		 * @generated NOT
+		 */
+		EAttribute ACTIVITY1__SUBDIAGRAM = eINSTANCE.getActivity1_Subdiagram();
 
 		/**
 		 * The meta object literal for the '{@link vcchart.impl.Activity2Impl <em>Activity2</em>}' class.
@@ -1456,6 +1481,11 @@ public interface VcchartPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ACTIVITY2 = eINSTANCE.getActivity2();
+		
+		/**
+		 * @generated NOT
+		 */
+		EAttribute ACTIVITY2__SUBDIAGRAM = eINSTANCE.getActivity2_Subdiagram();
 
 		/**
 		 * The meta object literal for the '{@link vcchart.impl.ProductImpl <em>Product</em>}' class.

@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import vcchart.Activity1;
@@ -249,7 +248,7 @@ public class VcchartPackageImpl extends EPackageImpl implements VcchartPackage {
 	public EReference getModel_Activitys1() {
 		return (EReference)modelEClass.getEStructuralFeatures().get(0);
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -420,6 +419,13 @@ public class VcchartPackageImpl extends EPackageImpl implements VcchartPackage {
 	public EClass getActivity1() {
 		return activity1EClass;
 	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public EAttribute getActivity1_Subdiagram() {
+		return (EAttribute)activity1EClass.getEStructuralFeatures().get(0);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -428,6 +434,13 @@ public class VcchartPackageImpl extends EPackageImpl implements VcchartPackage {
 	 */
 	public EClass getActivity2() {
 		return activity2EClass;
+	}
+	
+	/**
+	 * @generated NOT
+	 */
+	public EAttribute getActivity2_Subdiagram() {
+		return (EAttribute)activity2EClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -595,7 +608,7 @@ public class VcchartPackageImpl extends EPackageImpl implements VcchartPackage {
 	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated Not
 	 */
 	public void createPackageContents() {
 		if (isCreated) return;
@@ -630,8 +643,10 @@ public class VcchartPackageImpl extends EPackageImpl implements VcchartPackage {
 		relationsObjectEClass = createEClass(RELATIONS_OBJECT);
 
 		activity1EClass = createEClass(ACTIVITY1);
+		createEAttribute(activity1EClass, ACTIVITY1__SUBDIAGRAM);
 
 		activity2EClass = createEClass(ACTIVITY2);
+		createEAttribute(activity2EClass, ACTIVITY2__SUBDIAGRAM);
 
 		productEClass = createEClass(PRODUCT);
 
@@ -672,7 +687,7 @@ public class VcchartPackageImpl extends EPackageImpl implements VcchartPackage {
 	 * method is guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated Not
 	 */
 	public void initializePackageContents() {
 		if (isInitialized) return;
@@ -723,7 +738,11 @@ public class VcchartPackageImpl extends EPackageImpl implements VcchartPackage {
 		// Initialize classes, features, and operations; add parameters
 		initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModel_Activitys1(), this.getActivity1(), null, "Activitys1", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActivity1_Subdiagram(), ecorePackage.getEString(), "Subdiagram", null, 0, 1, Activity1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEReference(getModel_Activitys2(), this.getActivity2(), null, "Activitys2", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getActivity2_Subdiagram(), ecorePackage.getEString(), "Subdiagram", null, 0, 1, Activity2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		
 		initEReference(getModel_Clusters(), this.getCluster(), null, "Clusters", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModel_Products(), this.getProduct(), null, "Products", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModel_TechnicalTerms(), this.getTechnicalTerm(), null, "TechnicalTerms", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -623,6 +623,65 @@
          </action>
       </actionSet>
    </extension>
+   <extension
+         id="epc.diagram.partitioning"
+         name="Diagram partitioning menu"
+         point="org.eclipse.ui.popupMenus">
+      <?gmfgen generated="false"?>
+      <objectContribution
+            adaptable="false"
+            id="org.bflow.toolbox.diagram.ActivitySubDiagram"
+            objectClass="org.bflow.toolbox.extensions.edit.parts.BflowNodeEditPart">
+        <menu
+              icon="icons/move16.png"
+              id="SubDiagramInsert"
+              label="Diagram partitioning..."
+              path="additions"> 
+            <separator name="group1"/>
+        </menu>
+        <action
+              class="vcchart.diagram.actions.RemoveSubdiagramAction"
+              icon="icons/del16.png"
+              id="org.bflow.toolbox.epc.diagram.RemoveSubdiagramAction"
+              label="Remove partitioned diagram..."
+              menubarPath="SubDiagramInsert/group1">
+        </action>
+        <action
+              class="vcchart.diagram.actions.InsertSubdiagramAction"
+              enablesFor="1"
+              icon="icons/add16.png"
+              id="org.bflow.toolbox.diagram.InsertSubDiagramAction1"
+              label="Insert / Add existing partitioned diagram..."
+              menubarPath="SubDiagramInsert/group1">
+       </action>
+        <action
+              class="vcchart.diagram.actions.OpenSubdiagramAction"
+              icon="icons/play16.png"
+              id="org.bflow.toolbox.epc.diagram.OpenSubdiagramAction"
+              label="&amp;Open partitioned Diagram..."
+              menubarPath="SubDiagramInsert/group1">
+        </action>
+    	<action
+           class="vcchart.diagram.actions.CreateSubdiagramAction"
+           enablesFor="1"
+           icon="icons/app16.png"
+           id="org.bflow.toolbox.diagram.CreateSubDiagramAction1"
+           label="Create new partitioned diagram..."
+           menubarPath="SubDiagramInsert/group1">
+        </action>
+     <visibility>
+        <or>
+           <objectClass
+                 name="vcchart.diagram.edit.parts.Activity1EditPart">
+           </objectClass>
+           <objectClass
+                 name="vcchart.diagram.edit.parts.Activity2EditPart">
+           </objectClass>
+        </or>
+     </visibility>
+     </objectContribution>
+   </extension>
+   
 
    <!-- optionally, specify keybindings -->
 </plugin>

@@ -14,4 +14,14 @@ package vcchart;
  * @generated
  */
 public interface Activity1 extends NamedElement, All_Rel_1, All_Rel_3 {
+
+	/**
+	 * @generated NOT
+	 */
+	void setSubdiagram(String pathName);
+	
+	/**
+	 * @generated NOT
+	 */
+	String getSubdiagram();
 } // Activity1
