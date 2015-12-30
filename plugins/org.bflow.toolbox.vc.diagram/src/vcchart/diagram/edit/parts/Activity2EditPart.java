@@ -3,9 +3,14 @@
  */
 package vcchart.diagram.edit.parts;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.bflow.toolbox.extensions.edit.parts.BflowNodeEditPart;
+import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.MarginBorder;
+import org.eclipse.draw2d.MouseEvent;
+import org.eclipse.draw2d.MouseListener;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.ScalablePolygonShape;
 import org.eclipse.draw2d.Shape;
@@ -13,7 +18,9 @@ import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
@@ -26,11 +33,16 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
+import org.eclipse.gmf.runtime.emf.core.resources.GMFResource;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.PartInitException;
 
+import vcchart.Activity1;
+import vcchart.Activity2;
 import vcchart.diagram.edit.parts.Activity1EditPart.Activity1Figure;
 import vcchart.diagram.edit.policies.Activity2ItemSemanticEditPolicy;
 import vcchart.diagram.part.VcVisualIDRegistry;
@@ -54,6 +66,10 @@ public class Activity2EditPart extends BflowNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure primaryShape;
+	
+	/** The log instance for this class */
+	private static final Log logger = LogFactory.getLog(Activity2.class);
+
 
 	/**
 	 * @generated
@@ -283,8 +299,25 @@ public class Activity2EditPart extends BflowNodeEditPart {
 			fFigureActivity2LabelFigure.setText("");
 			fFigureActivity2LabelFigure.setBorder(new MarginBorder(getMapMode().DPtoLP(4), getMapMode().DPtoLP(4), getMapMode().DPtoLP(4), getMapMode()
 					.DPtoLP(4)));
-			this.add(fFigureActivity2LabelFigure);
+			
+			fFigureActivity2LabelFigure.addMouseListener(new MouseListener.Stub() {
+				
+				// Bei Einfachklick editieren des LAbels, bei doppelt öffne Subdiagramm, wenn vorhanden
+				@Override
+				public void mouseDoubleClicked(final MouseEvent me) {
+					openSubdiagram();
+					me.consume();
+				}
+				
+				@Override
+				public void mousePressed(final MouseEvent me){
+					Activity2NameEditPart a2NameEP = (Activity2NameEditPart) getChildBySemanticHint(VcVisualIDRegistry.getType(Activity2NameEditPart.VISUAL_ID));
+					a2NameEP.performDirectEdit();
+					me.consume();
+				}
+			});
 
+			this.add(fFigureActivity2LabelFigure);
 		}
 
 		/**
@@ -293,7 +326,21 @@ public class Activity2EditPart extends BflowNodeEditPart {
 		public WrappingLabel getFigureActivity2LabelFigure() {
 			return fFigureActivity2LabelFigure;
 		}
+		
+		@Override
+		protected void paintClientArea(Graphics graphics) {
 
+			super.paintClientArea(graphics);
+			Activity2 a2 = (Activity2) Activity2EditPart.this.getPrimaryView().getElement();
+
+			if (a2.getSubdiagram() != null && !a2.getSubdiagram().isEmpty()) {
+				Point p = fFigureActivity2LabelFigure.getLocation();
+				Dimension d = fFigureActivity2LabelFigure.getSize();
+				Image img = new Image(null, this.getClass().getResourceAsStream("/icons/play10.png"));
+				Point nPoint = new Point(p.x + d.width - 16, p.y + 3);
+				graphics.drawImage(img, nPoint);
+			}
+		}
 	}
 
 	@Override
@@ -304,6 +351,25 @@ public class Activity2EditPart extends BflowNodeEditPart {
 	@Override
 	public IFigure getPrimaryFigure() {
 		return getPrimaryShape();
+	}
+	
+	/**
+	 * Opens the subdiagram if this edit part is connected with one.
+	 */
+	private void openSubdiagram() {
+		Activity2 a2 = (Activity2) Activity2EditPart.this.getPrimaryView().getElement();
+
+		if (a2.getSubdiagram() != null && !a2.getSubdiagram().isEmpty()) {
+			URI fileURI = URI.createPlatformResourceURI(a2.getSubdiagram(), true);
+			Resource res = new GMFResource(fileURI);
+
+			try {
+				org.bflow.toolbox.epc.diagram.part.EpcDiagramEditorUtil.openDiagram(res);
+			} catch (PartInitException e) {
+				logger.error("Could not open linked subdiagram", e);
+			}
+
+		}
 	}
 
 }
