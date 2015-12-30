@@ -55,7 +55,7 @@ public class CreateSubdiagramAction implements IObjectActionDelegate {
 				a1.setSubdiagram(pathName);
 				t.commit();
 			} catch (RollbackException e) {
-				logger.error("Subdiagram could not linked with Activity.", e);
+				logger.error("Subdiagram could not linked with Activity1.", e);
 			} catch (InterruptedException e) {
 				logger.error("The current thread is interuppted, therefore no transaction can be started.", e);
 			}
@@ -67,7 +67,7 @@ public class CreateSubdiagramAction implements IObjectActionDelegate {
 				a2.setSubdiagram(pathName);
 				t.commit();
 			} catch (RollbackException e) {
-				logger.error("Subdiagram could not linked with Activity.", e);
+				logger.error("Subdiagram could not linked with Activity2.", e);
 			} catch (InterruptedException e) {
 				logger.error("The current thread is interuppted, therefore no transaction can be started.", e);
 			}

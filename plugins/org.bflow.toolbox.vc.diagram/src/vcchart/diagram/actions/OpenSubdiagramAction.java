@@ -44,7 +44,7 @@ public class OpenSubdiagramAction implements IObjectActionDelegate   {
 
 	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
-		//action.setEnabled(false);
+		action.setEnabled(false);
 		subdiagram = null;
 		
 		IStructuredSelection strSel = (IStructuredSelection) selection;
@@ -56,7 +56,7 @@ public class OpenSubdiagramAction implements IObjectActionDelegate   {
 			
 			if(a1.getSubdiagram() != null) {
 				subdiagram = a1.getSubdiagram();
-				//action.setEnabled(true);
+				action.setEnabled(true);
 			}
 
 			return;
@@ -67,7 +67,7 @@ public class OpenSubdiagramAction implements IObjectActionDelegate   {
 			
 			if(a2.getSubdiagram() != null) {
 				subdiagram = a2.getSubdiagram();
-				//action.setEnabled(true);
+				action.setEnabled(true);
 			}
 
 			return;
