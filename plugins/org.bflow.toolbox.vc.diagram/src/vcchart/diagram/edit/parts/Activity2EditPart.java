@@ -326,6 +326,7 @@ public class Activity2EditPart extends BflowNodeEditPart {
 			
 			this.add(fFigureActivity2LabelFigure);
 			this.add(subdiagram_icon);
+
 		}
 
 		/**
@@ -339,7 +340,6 @@ public class Activity2EditPart extends BflowNodeEditPart {
 		protected void paintClientArea(Graphics graphics) {
 
 			super.paintClientArea(graphics);
-
 			Activity2 a2 = (Activity2) Activity2EditPart.this.getPrimaryView().getElement();
 
 			if (a2.getSubdiagram() != null && !a2.getSubdiagram().isEmpty()) {

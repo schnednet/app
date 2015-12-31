@@ -3,10 +3,10 @@
  */
 package vcchart.diagram.edit.parts;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.bflow.toolbox.extensions.edit.parts.BflowDiagramEditPart;
+
 import org.bflow.toolbox.extensions.edit.parts.BflowNodeEditPart;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.IFigure;
@@ -40,7 +40,6 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.PartInitException;
-
 import vcchart.Activity1;
 import vcchart.diagram.edit.policies.Activity1ItemSemanticEditPolicy;
 import vcchart.diagram.part.VcVisualIDRegistry;
@@ -324,7 +323,6 @@ public class Activity1EditPart extends BflowNodeEditPart {
 			
 			this.add(fFigureActivity1LabelFigure);
 			this.add(subdiagram_icon);
-			
 		}
 
 		/**
@@ -333,7 +331,7 @@ public class Activity1EditPart extends BflowNodeEditPart {
 		public WrappingLabel getFigureActivity1LabelFigure() {
 			return fFigureActivity1LabelFigure;
 		}
-		
+				
 		@Override
 		protected void paintClientArea(Graphics graphics) {
 
@@ -366,6 +364,7 @@ public class Activity1EditPart extends BflowNodeEditPart {
 		return getPrimaryShape();
 	}
 	
+
 	
 	public Color getCurentColorShemaBackgroundColor() {
 		BflowDiagramEditPart diagramEditPart = BflowDiagramEditPart.getCurrentViewer();
